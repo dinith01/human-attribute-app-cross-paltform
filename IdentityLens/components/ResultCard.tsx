@@ -10,7 +10,7 @@ export const ResultCard = () => {
 
   return (
     // 🔮 The Glassmorphism Result Container
-    <BlurView intensity={70} tint="light" style={styles.glassCard}>
+    <BlurView intensity={70} tint="dark" style={styles.glassCard}>
       <Text style={styles.resultTitle}>AI Insights</Text>
       
       <View style={styles.divider} />

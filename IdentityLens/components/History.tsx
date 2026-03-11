@@ -25,7 +25,7 @@ export const History = () => {
     const date = new Date(item.created_at).toLocaleDateString();
 
     return (
-      <BlurView intensity={70} tint="light" style={styles.historyCard}>
+      <BlurView intensity={70} tint="dark" style={styles.historyCard}>
         <Image source={{ uri: item.image_url }} style={styles.historyImage} />
         
         <View style={styles.resultsContainer}>
@@ -71,5 +71,5 @@ const styles = StyleSheet.create({
   dateText: { color: 'rgba(255,255,255,0.7)', fontSize: 12, marginBottom: 5 },
   divider: { height: 1, backgroundColor: 'rgba(255, 255, 255, 0.2)', marginBottom: 8 },
   resultText: { fontSize: 14, color: '#FFFFFF', marginBottom: 4 },
-  bold: { fontWeight: 'bold', color: '#FF7EB3' },
+  bold: { fontWeight: 'bold', color: '#38BDF8' },
 });

@@ -31,7 +31,7 @@ export const ImageSelector = () => {
   return (
     <>
       {/* 🔮 The Glassmorphism Container */}
-      <BlurView intensity={60} tint="light" style={styles.glassCard}>
+      <BlurView intensity={60} tint="dark" style={styles.glassCard}>
         {imageUri ? (
           <Image source={{ uri: imageUri }} style={styles.image} />
         ) : (

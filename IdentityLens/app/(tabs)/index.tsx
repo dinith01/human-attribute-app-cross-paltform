@@ -38,7 +38,7 @@ export default function App() {
 
   return (
     <LinearGradient 
-      colors={['#1E3C72', '#2A5298', '#FF7EB3']} 
+      colors={['#0F172A', '#1E293B', '#0F172A']}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.container}
