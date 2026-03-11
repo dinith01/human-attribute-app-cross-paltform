@@ -7,15 +7,53 @@ interface AppState {
   imageUri: string | null;
   results: Record<string, string> | null;
   loading: boolean;
+  history: any[]; // 🆕 Array to hold past scans
+  currentTab: 'scanner' | 'history'; // 🆕 Track the current screen
+  
   setImageUri: (uri: string | null) => void;
+  setTab: (tab: 'scanner' | 'history') => void; // 🆕 Function to switch screens
   analyzeImage: (asset: any) => Promise<void>;
+  fetchHistory: () => Promise<void>; // 🆕 Function to get data from Supabase
 }
 
 export const useAppStore = create<AppState>((set) => ({
-  imageUri: null,
+ imageUri: null,
   results: null,
   loading: false,
-  setImageUri: (uri) => set({ imageUri: uri }),
+  history: [],
+  currentTab: 'scanner',
+
+setImageUri: (uri) => set({ imageUri: uri }),
+  setTab: (tab) => set({ currentTab: tab }),
+
+
+// 🆕 Fetch past scans from PostgreSQL
+  fetchHistory: async () => {
+    set({ loading: true });
+    
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      set({ loading: false });
+      return;
+    }
+
+    // Fetch from 'scan_history' table, newest first
+    const { data, error } = await supabase
+      .from('scan_history')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error("Fetch Error:", error);
+      Alert.alert("Error", "Could not load history.");
+    } else {
+      set({ history: data || [] });
+    }
+    
+    set({ loading: false });
+  },
+
+
   
   analyzeImage: async (asset) => {
     set({ loading: true, results: null });
